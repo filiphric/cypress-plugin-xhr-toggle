@@ -54,7 +54,6 @@ export const addStyles = () => {
   const turnOffXhrDescription = 'Turn off XHR visibility'
   const turnOnXhrDescription = 'Turn on XHR visibility'
 
-  // add style tag and element if not present
   // append styles
   if (!hasStyles) {
     const reporterEl = top?.document.querySelector('#unified-reporter')
@@ -62,7 +61,6 @@ export const addStyles = () => {
     reporterStyleEl.setAttribute('id', 'xhrStyle')
     reporterStyleEl.innerHTML = defaultStyles
     reporterEl?.appendChild(reporterStyleEl)
-
   }
 
   if (!hasToggleButton) {
@@ -74,6 +72,7 @@ export const addStyles = () => {
     const headerToggleButton = document.createElement('button')
     const headerToggleInput = document.createElement('input')
     const headerToggleLabel = document.createElement('label')
+
     headerToggleInput.setAttribute('type', 'checkbox')
     headerToggleInput.setAttribute('id', 'xhrToggle')
     headerToggleLabel.setAttribute('for', 'xhrToggle')
@@ -84,6 +83,7 @@ export const addStyles = () => {
     headerToggleTooltip.setAttribute('id', 'xhrTooltip')
     headerToggleTooltip.innerText = turnOffXhrDescription
     headerToggleButton.setAttribute('aria-label', turnOffXhrDescription)
+
     header?.appendChild(headerToggleDiv)
     headerToggleDiv?.appendChild(headerToggleSpan)
     headerToggleDiv?.appendChild(headerToggleTooltip)
@@ -97,7 +97,6 @@ export const addStyles = () => {
   const xhrTooltipElement = top?.document.querySelector('#xhrTooltip')
 
   xhrToggleElement.addEventListener('change', (e) => {
-
 
     // @ts-ignore errors about HTMLElement
     if (e.target.checked) {
