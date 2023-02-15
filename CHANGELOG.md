@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/filiphric/cypress-plugin-xhr-toggle/compare/v0.0.4...v0.0.5) (2023-02-15)
+
+
+### Features
+
+* initial commit ([4e4f5f6](https://github.com/filiphric/cypress-plugin-xhr-toggle/commits/4e4f5f667a13d0b926725fae79e245f9749051da))
+
 ### [0.0.4](https://github.com/filiphric/cypress-plugin-xhr-toggle/compare/v0.0.3...v0.0.4) (2023-02-15)
 
 
