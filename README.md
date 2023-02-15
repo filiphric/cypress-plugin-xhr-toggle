@@ -4,7 +4,7 @@
 </p>
 
 <p align="center">
-A small Cypress helper that hides your XHR requests from timeline.
+A small Cypress helper that de-clutters your timeline by hiding XHR requests.
 </p>
 
 ![Toggle XHR in timeline](./images/toggle.gif)
