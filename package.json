@@ -10,6 +10,9 @@
     "/dist/*"
   ],
   "scripts": {
+    "test": "cypress run",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
     "build": "tsc",
     "build:watch": "tsc -w",
     "lint": "tsc --noEmit && eslint . --max-warnings=15 --quiet",
