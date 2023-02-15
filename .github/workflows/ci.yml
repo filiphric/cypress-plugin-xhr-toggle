@@ -6,8 +6,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-          with:
-            persist-credentials: false
+        with:
+          persist-credentials: false
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
