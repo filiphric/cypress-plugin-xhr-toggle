@@ -26,7 +26,21 @@ require('cypress-plugin-xhr-toggle')
 ```
 
 ### Usage
-Open Cypress in GUI mode and see a new button. Click on it to hide all your XHR lines to de-clutter your timeline
+Open Cypress in GUI mode and see a new button. Click on it to hide all your XHR lines to de-clutter your timeline. You can set this up as default behavior by setting up `hideXhr` into your `env` object:
+
+```ts
+import { defineConfig } from "cypress";
+
+export default defineConfig({
+  fixturesFolder: false,
+  e2e: {
+    setupNodeEvents(on, config) {},
+    env: {
+      hideXhr: true
+    }
+  },
+});
+```
 
 <hr>
 <p align="center">

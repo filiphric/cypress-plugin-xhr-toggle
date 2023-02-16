@@ -1,5 +1,7 @@
 export const addStyles = () => {
 
+
+
   const { $ } = Cypress
   const hasStyles = top?.document.querySelector('#xhrStyle')
   const hasToggleButton = top?.document.querySelector('#xhrToggle')
@@ -74,6 +76,7 @@ export const addStyles = () => {
     const headerToggleLabel = document.createElement('label')
 
     headerToggleInput.setAttribute('type', 'checkbox')
+
     headerToggleInput.setAttribute('id', 'xhrToggle')
     headerToggleLabel.setAttribute('for', 'xhrToggle')
     headerToggleLabel.innerHTML = turnOffXhrIcon
@@ -96,17 +99,35 @@ export const addStyles = () => {
   const xhrToggleLabelElement = top?.document.querySelector('[for=xhrToggle]')
   const xhrTooltipElement = top?.document.querySelector('#xhrTooltip')
 
-  xhrToggleElement.addEventListener('change', (e) => {
+  const hideXhr = () => {
+    $("#unified-reporter", top?.document).find(".command.command-name-request").has(".command-is-event").css("display", "none");
+    xhrToggleLabelElement.innerHTML = turnOnXhrIcon
+    xhrTooltipElement.innerHTML = turnOnXhrDescription
+  }
 
+  const showXhr = () => {
+    $("#unified-reporter", top?.document).find(".command.command-name-request").has(".command-is-event").css("display", "block");
+    xhrToggleLabelElement.innerHTML = turnOffXhrIcon
+    xhrTooltipElement.innerHTML = turnOffXhrDescription
+  }
+
+  if (Cypress.env('hideXhr')) {
+    xhrToggleElement.setAttribute('checked', 'true')
+    Cypress.on('log:added', () => {
+      hideXhr()
+    })
+  } else {
+    // just to be on the safe side when changing hideXhr variable
+    xhrToggleElement.setAttribute('checked', 'false')
+    showXhr()
+  }
+
+  xhrToggleElement.addEventListener('change', (e) => {
     // @ts-ignore errors about HTMLElement
     if (e.target.checked) {
-      $("#unified-reporter", top?.document).find(".command.command-name-request").has(".command-is-event").css("display", "none");
-      xhrToggleLabelElement.innerHTML = turnOnXhrIcon
-      xhrTooltipElement.innerHTML = turnOnXhrDescription
+      hideXhr()
     } else {
-      $("#unified-reporter", top?.document).find(".command.command-name-request").has(".command-is-event").css("display", "block");
-      xhrToggleLabelElement.innerHTML = turnOffXhrIcon
-      xhrTooltipElement.innerHTML = turnOffXhrDescription
+      showXhr()
     }
   })
 
