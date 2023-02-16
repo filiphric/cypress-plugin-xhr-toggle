@@ -1,5 +1,7 @@
 export const addStyles = () => {
 
+
+
   const { $ } = Cypress
   const hasStyles = top?.document.querySelector('#xhrStyle')
   const hasToggleButton = top?.document.querySelector('#xhrToggle')
@@ -54,7 +56,6 @@ export const addStyles = () => {
   const turnOffXhrDescription = 'Turn off XHR visibility'
   const turnOnXhrDescription = 'Turn on XHR visibility'
 
-  // add style tag and element if not present
   // append styles
   if (!hasStyles) {
     const reporterEl = top?.document.querySelector('#unified-reporter')
@@ -62,7 +63,6 @@ export const addStyles = () => {
     reporterStyleEl.setAttribute('id', 'xhrStyle')
     reporterStyleEl.innerHTML = defaultStyles
     reporterEl?.appendChild(reporterStyleEl)
-
   }
 
   if (!hasToggleButton) {
@@ -74,7 +74,9 @@ export const addStyles = () => {
     const headerToggleButton = document.createElement('button')
     const headerToggleInput = document.createElement('input')
     const headerToggleLabel = document.createElement('label')
+
     headerToggleInput.setAttribute('type', 'checkbox')
+
     headerToggleInput.setAttribute('id', 'xhrToggle')
     headerToggleLabel.setAttribute('for', 'xhrToggle')
     headerToggleLabel.innerHTML = turnOffXhrIcon
@@ -84,6 +86,7 @@ export const addStyles = () => {
     headerToggleTooltip.setAttribute('id', 'xhrTooltip')
     headerToggleTooltip.innerText = turnOffXhrDescription
     headerToggleButton.setAttribute('aria-label', turnOffXhrDescription)
+
     header?.appendChild(headerToggleDiv)
     headerToggleDiv?.appendChild(headerToggleSpan)
     headerToggleDiv?.appendChild(headerToggleTooltip)
@@ -96,18 +99,35 @@ export const addStyles = () => {
   const xhrToggleLabelElement = top?.document.querySelector('[for=xhrToggle]')
   const xhrTooltipElement = top?.document.querySelector('#xhrTooltip')
 
+  const hideXhr = () => {
+    $("#unified-reporter", top?.document).find(".command.command-name-request").has(".command-is-event").css("display", "none");
+    xhrToggleLabelElement.innerHTML = turnOnXhrIcon
+    xhrTooltipElement.innerHTML = turnOnXhrDescription
+  }
+
+  const showXhr = () => {
+    $("#unified-reporter", top?.document).find(".command.command-name-request").has(".command-is-event").css("display", "block");
+    xhrToggleLabelElement.innerHTML = turnOffXhrIcon
+    xhrTooltipElement.innerHTML = turnOffXhrDescription
+  }
+
+  if (Cypress.env('hideXhr')) {
+    xhrToggleElement.setAttribute('checked', 'true')
+    Cypress.on('log:added', () => {
+      hideXhr()
+    })
+  } else {
+    // just to be on the safe side when changing hideXhr variable
+    xhrToggleElement.setAttribute('checked', 'false')
+    showXhr()
+  }
+
   xhrToggleElement.addEventListener('change', (e) => {
-
-
     // @ts-ignore errors about HTMLElement
     if (e.target.checked) {
-      $("#unified-reporter", top?.document).find(".command.command-name-request").has(".command-is-event").css("display", "none");
-      xhrToggleLabelElement.innerHTML = turnOnXhrIcon
-      xhrTooltipElement.innerHTML = turnOnXhrDescription
+      hideXhr()
     } else {
-      $("#unified-reporter", top?.document).find(".command.command-name-request").has(".command-is-event").css("display", "block");
-      xhrToggleLabelElement.innerHTML = turnOffXhrIcon
-      xhrTooltipElement.innerHTML = turnOffXhrDescription
+      showXhr()
     }
   })
 

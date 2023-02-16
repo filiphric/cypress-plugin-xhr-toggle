@@ -2,7 +2,7 @@
   "author": "Filip Hric (https://filiphric.com/)",
   "license": "ISC",
   "name": "cypress-plugin-xhr-toggle",
-  "version": "0.0.0",
+  "version": "1.0.1",
   "description": "Turn off xhr requests in Cypress timeline",
   "main": "dist/index.js",
   "types": "dist/types.d.ts",
@@ -10,6 +10,9 @@
     "/dist/*"
   ],
   "scripts": {
+    "test": "cypress run",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
     "build": "tsc",
     "build:watch": "tsc -w",
     "lint": "tsc --noEmit && eslint . --max-warnings=15 --quiet",
@@ -38,6 +41,7 @@
     "@types/node": "^18.11.8",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
+    "cypress": "^12.5.1",
     "eslint": "^8.27.0",
     "generate-changelog": "^1.8.0",
     "husky": "^8.0.2",

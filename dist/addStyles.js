@@ -50,7 +50,6 @@ export const addStyles = () => {
     const turnOnXhrIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"><path fill="#afb3c7" d="M12 4C7 4 2.73 7.11 1 11.5C2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z"/></svg>`;
     const turnOffXhrDescription = 'Turn off XHR visibility';
     const turnOnXhrDescription = 'Turn on XHR visibility';
-    // add style tag and element if not present
     // append styles
     if (!hasStyles) {
         const reporterEl = top === null || top === void 0 ? void 0 : top.document.querySelector('#unified-reporter');
@@ -86,17 +85,34 @@ export const addStyles = () => {
     const xhrToggleElement = top === null || top === void 0 ? void 0 : top.document.querySelector('#xhrToggle');
     const xhrToggleLabelElement = top === null || top === void 0 ? void 0 : top.document.querySelector('[for=xhrToggle]');
     const xhrTooltipElement = top === null || top === void 0 ? void 0 : top.document.querySelector('#xhrTooltip');
+    const hideXhr = () => {
+        $("#unified-reporter", top === null || top === void 0 ? void 0 : top.document).find(".command.command-name-request").has(".command-is-event").css("display", "none");
+        xhrToggleLabelElement.innerHTML = turnOnXhrIcon;
+        xhrTooltipElement.innerHTML = turnOnXhrDescription;
+    };
+    const showXhr = () => {
+        $("#unified-reporter", top === null || top === void 0 ? void 0 : top.document).find(".command.command-name-request").has(".command-is-event").css("display", "block");
+        xhrToggleLabelElement.innerHTML = turnOffXhrIcon;
+        xhrTooltipElement.innerHTML = turnOffXhrDescription;
+    };
+    if (Cypress.env('hideXhr')) {
+        xhrToggleElement.setAttribute('checked', 'true');
+        Cypress.on('log:added', () => {
+            hideXhr();
+        });
+    }
+    else {
+        // just to be on the safe side when changing hideXhr variable
+        xhrToggleElement.setAttribute('checked', 'false');
+        showXhr();
+    }
     xhrToggleElement.addEventListener('change', (e) => {
         // @ts-ignore errors about HTMLElement
         if (e.target.checked) {
-            $("#unified-reporter", top === null || top === void 0 ? void 0 : top.document).find(".command.command-name-request").has(".command-is-event").css("display", "none");
-            xhrToggleLabelElement.innerHTML = turnOnXhrIcon;
-            xhrTooltipElement.innerHTML = turnOnXhrDescription;
+            hideXhr();
         }
         else {
-            $("#unified-reporter", top === null || top === void 0 ? void 0 : top.document).find(".command.command-name-request").has(".command-is-event").css("display", "block");
-            xhrToggleLabelElement.innerHTML = turnOffXhrIcon;
-            xhrTooltipElement.innerHTML = turnOffXhrDescription;
+            showXhr();
         }
     });
 };
