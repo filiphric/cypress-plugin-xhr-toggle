@@ -1,5 +1,5 @@
 it('test', () => {
 
-  expect(true).to.be.true
+  cy.visit('/server/index.html')
 
 });
