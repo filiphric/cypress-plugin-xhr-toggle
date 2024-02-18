@@ -99,14 +99,17 @@ export const addStyles = () => {
   const xhrToggleLabelElement = top.document.querySelector('[for=xhrToggle]')
   const xhrTooltipElement = top.document.querySelector('#xhrTooltip')
 
-  if (Cypress.env('hideXhr') === true || Cypress.env('hideXhr') === undefined) {
-    xhrToggleElement.checked = true
-    xhrToggleLabelElement.innerHTML = turnOnXhrIcon
-    xhrTooltipElement.innerHTML = turnOnXhrDescription
-  } else {
-    xhrToggleElement.checked = false
-    xhrToggleLabelElement.innerHTML = turnOffXhrIcon
-    xhrTooltipElement.innerHTML = turnOffXhrDescription
+  if (xhrToggleElement && xhrToggleLabelElement && xhrTooltipElement) {
+
+    if (Cypress.env('hideXhr') === true || Cypress.env('hideXhr') === undefined) {
+      xhrToggleElement.checked = true
+      xhrToggleLabelElement.innerHTML = turnOnXhrIcon
+      xhrTooltipElement.innerHTML = turnOnXhrDescription
+    } else {
+      xhrToggleElement.checked = false
+      xhrToggleLabelElement.innerHTML = turnOffXhrIcon
+      xhrTooltipElement.innerHTML = turnOffXhrDescription
+    }
   }
 
   xhrToggleElement?.addEventListener('change', (e) => {
