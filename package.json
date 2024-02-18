@@ -2,7 +2,7 @@
   "author": "Filip Hric (https://filiphric.com/)",
   "license": "ISC",
   "name": "cypress-plugin-xhr-toggle",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Turn off xhr requests in Cypress timeline",
   "main": "dist/index.js",
   "types": "dist/types.d.ts",
