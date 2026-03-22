@@ -33,23 +33,6 @@ declare global {
        */
       env(object: PluginEnvOptions): void;
 
-      /**
-       * Returns a specific exposed value (Cypress 15+).
-       * @see https://on.cypress.io/expose
-       */
-      expose<T extends keyof PluginExposeOptions>(key: T): PluginExposeOptions[T];
-
-      /**
-       * Sets an exposed value at runtime (Cypress 15+).
-       * @see https://on.cypress.io/expose
-       */
-      expose<T extends keyof PluginExposeOptions>(key: T, value: PluginExposeOptions[T]): void;
-
-      /**
-       * Sets multiple exposed values at runtime (Cypress 15+).
-       * @see https://on.cypress.io/expose
-       */
-      expose(object: PluginExposeOptions): void;
     }
     interface TestConfigOverrides {
       env?: PluginEnvOptions
