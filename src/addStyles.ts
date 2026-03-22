@@ -101,7 +101,15 @@ export const addStyles = () => {
 
   if (xhrToggleElement && xhrToggleLabelElement && xhrTooltipElement) {
 
-    if (Cypress.env('hideXhr') === true || Cypress.env('hideXhr') === undefined) {
+    let hideXhr;
+    if (typeof (Cypress as any).expose === 'function') {
+      hideXhr = (Cypress as any).expose('hideXhr');
+    }
+    if (hideXhr === undefined) {
+      hideXhr = Cypress.env('hideXhr');
+    }
+
+    if (hideXhr === true || hideXhr === undefined) {
       xhrToggleElement.checked = true
       xhrToggleLabelElement.innerHTML = turnOnXhrIcon
       xhrTooltipElement.innerHTML = turnOnXhrDescription

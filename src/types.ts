@@ -32,13 +32,21 @@ declare global {
        *    Cypress.env({ host: "http://server.dev.local", foo: "foo" })
        */
       env(object: PluginEnvOptions): void;
+
     }
     interface TestConfigOverrides {
       env?: PluginEnvOptions
+    }
+    interface DefineDevServerConfig {
+      expose?: PluginExposeOptions
     }
   }
 }
 
 export interface PluginEnvOptions extends Cypress.ObjectLike {
+  hideXhr?: boolean
+}
+
+export interface PluginExposeOptions extends Cypress.ObjectLike {
   hideXhr?: boolean
 }
