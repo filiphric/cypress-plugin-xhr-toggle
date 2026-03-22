@@ -32,13 +32,38 @@ declare global {
        *    Cypress.env({ host: "http://server.dev.local", foo: "foo" })
        */
       env(object: PluginEnvOptions): void;
+
+      /**
+       * Returns a specific exposed value (Cypress 15+).
+       * @see https://on.cypress.io/expose
+       */
+      expose<T extends keyof PluginExposeOptions>(key: T): PluginExposeOptions[T];
+
+      /**
+       * Sets an exposed value at runtime (Cypress 15+).
+       * @see https://on.cypress.io/expose
+       */
+      expose<T extends keyof PluginExposeOptions>(key: T, value: PluginExposeOptions[T]): void;
+
+      /**
+       * Sets multiple exposed values at runtime (Cypress 15+).
+       * @see https://on.cypress.io/expose
+       */
+      expose(object: PluginExposeOptions): void;
     }
     interface TestConfigOverrides {
       env?: PluginEnvOptions
+    }
+    interface DefineDevServerConfig {
+      expose?: PluginExposeOptions
     }
   }
 }
 
 export interface PluginEnvOptions extends Cypress.ObjectLike {
+  hideXhr?: boolean
+}
+
+export interface PluginExposeOptions extends Cypress.ObjectLike {
   hideXhr?: boolean
 }
