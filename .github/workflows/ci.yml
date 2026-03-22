@@ -1,13 +1,17 @@
 name: e2e-tests
 on: [push]
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Cypress run
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6
         with:
           build: npm run build
       - name: Semantic Release
@@ -17,5 +21,5 @@ jobs:
         with:
           branch: main
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
