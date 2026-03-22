@@ -1,9 +1,5 @@
 name: e2e-tests
 on: [push]
-permissions:
-  contents: write
-  issues: write
-  pull-requests: write
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
@@ -14,12 +10,3 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           build: npm run build
-      - name: Semantic Release
-        if: github.ref == 'refs/heads/main'
-        uses: cycjimmy/semantic-release-action@v3
-        id: semantic
-        with:
-          branch: main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
