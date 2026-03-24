@@ -35,7 +35,7 @@ declare global {
 
     }
     interface TestConfigOverrides {
-      env?: PluginEnvOptions
+      env?: Partial<PluginEnvOptions>
     }
     interface DefineDevServerConfig {
       expose?: PluginExposeOptions
